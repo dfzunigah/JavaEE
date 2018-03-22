@@ -3,6 +3,24 @@ Ejemplos de Java Web EE desarrollados durante el curso Java Web EE.
 
 Este proyecto se desarrollo usando NetBeans 8.2 & Java EE.
 
+## Procedimiento
+
+* Conectarse a la base de datos.
+* Ejecutar la primera parte, las primeras 14 líneas, del [script 1 SQL](https://github.com/dfzunigah/JavaEE/blob/master/sql_script1.txt) para borrar las tablas.
+  * En NetBeans en la pestaña "Services" abrir el campo de "Databases" y expandir la base de datos, luego expandir la sección "Tables". Click derecho sobre cualquiera de las tablas y abrir la opción "Execute Command", se creará una nueva pestaña para ejecutar comandos SQL en la DB.
+* Hacer un Clean and Build al proyecto.
+  * Esto se hace haciendo click derecho sobre el proyecto (Con forma de "Triangulo") y buscando la opción "Clean and Build".
+* Hacer un Deploy al proyecto.
+  * Esto se hace haciendo click derecho sobre el proyecto (Con forma de "Triangulo") y buscando la opción "Deploy".
+* Se verifica que se hayan creado las tablas y que estén vacías.
+  * Para esto, en la pestaña "Services", la opción "Databases" y sobre la base de datos se verifica el campo "Tables". Si se quiere verificar que estén vacías, correr el [script 2 SQL](https://github.com/dfzunigah/JavaEE/blob/master/sql_script2.txt), no debería aparecer nada en las tablas.
+* Se ejecuta la segunda parte del [script 1 SQL](https://github.com/dfzunigah/JavaEE/blob/master/sql_script1.txt), desde la línea 15 hasta el final, en donde se simula la creación de varios items en la DB.
+* Se ejecuta un de nuevo el [script 2 SQL](https://github.com/dfzunigah/JavaEE/blob/master/sql_script2.txt) con el fin de comprobar que ya existen datos en la DB pero que aún no hay órdenes ni información de factura.
+* Se corre el proyecto. Click derecho, "Run".
+  * Se abre una pestaña en el navegador que muestra el index del servlet.
+* Se accede al servlet a través de la URL, esto es adicionar al final su nombre, en este caso `ClienteEJB`.
+* Finalmente se ejecuta de nuevo [script 2 SQL](https://github.com/dfzunigah/JavaEE/blob/master/sql_script2.txt) para comprobar que la ejecución del servlet fue exitosa y se haya creado la orden de compra y la información de la factura.
+
 ## Anotaciones
 
 * Las anotaciones se colocan encima de lo que queremos anotar. El orden en el que yo defino mis anotaciones (@) no altera el resultado.
@@ -39,7 +57,7 @@ En el caso de los esquemas .SINGLETABLE y .JOINED se crea automaticamente un atr
   * Cuando la relación es muchos a muchos `@ManyToMany`, uno elige quién es el dueño de la relación. En cualquier caso una de las entidades debe llevar la etiqueta de dueño.
   * Por defecto todas las relaciones son opcionales, es decir, no se necesita colocar nada además del tipo de relación, por ejemplo `@ManyToOne` es una relación opcional. Si se quiere hacer que se vuelvan obligatorias entonces se utiliza la siguiente anotación `@Relationship(optional=false)`
   
-## Cositas varias
+## Otras cosas
 
 * Lo ideal es que todas las entidades sean serializables, es decir que implementen la interfaz Serializable, de modo que se puedan guardar en disco secundario y de esta manera se pueda desplegar la aplicación en otras máquinas.
   * En caso de no hacer serializables las entidades igual el proyecto funciona pero a nivel local.
