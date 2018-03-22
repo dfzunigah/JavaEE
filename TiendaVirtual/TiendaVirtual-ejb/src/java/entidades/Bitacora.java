@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author Daniel Zuñiga (13/04/18) @ UEC
+ * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 /*Esta clase es para llevar un log de los eventos en la aplicación.*/
 @Entity
