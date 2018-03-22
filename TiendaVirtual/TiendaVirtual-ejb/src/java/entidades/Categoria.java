@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
- * @author Daniel Zuñiga (13/04/18) @ UEC
+ * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 @Entity
 public class Categoria implements Serializable {
