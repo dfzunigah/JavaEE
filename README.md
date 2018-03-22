@@ -17,6 +17,12 @@ Este proyecto se desarrollo usando NetBeans 8.2 & Java EE.
   * Con .DATE sólo da la fecha (dd/mm/yyyy).
   * Con .TIME sólo da la hora.
   * Con .TIMESTAMP da la fecha y la hora.
+* La notación `@Remove` indica a los EJB en estado statefull en qué método debe destruir el Bean. Se colocan en la interfaz. Para ver un ejemplo mirar [AdministracionOrdenLocal.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/logica/AdministracionOrdenLocal.java).
+* Utilizando un EntityManager como moderador entre el modelo de dominio y el modelo relacional, es posible crear Queries a través de notaciones.
+  * El tipo de Query implementado en este caso es @NamedQuery. Estos se componen básicamente de dos (2) partes: Un nombre y la Query que es escrita en PSQL.
+  * El nombre debe ser **único** entre todas las queries de todo el programa.
+  * Para ver un ejemplo de su definición, ver [Producto.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/entidades/Producto.java) o [Comprador.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/entidades/Comprador.java).
+  * Para ver la implementación de las queries, ver los métodos consultarCompradores() o consultarProductos() en [AdministracionPersistenciaJPA.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/logica/AdministracionPersistenciaJPA.java).
 
 ## Relaciones
 * El modelo relacional no maneja herencia, cosa que sí maneja el modelo de dominio. Por eso existen tres alternativas:
