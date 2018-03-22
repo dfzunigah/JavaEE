@@ -19,7 +19,6 @@ public interface AdministracionOrdenLocal {
     
     public void adicionarInformacionEnvio(InformaciónEnvio informacionEnvio);
     
-    /*Estos métodos indican que después de ejecutarse, el objeto se destruya.*/
     @Remove
     public Integer crearOrdenCompra();
     
