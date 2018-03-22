@@ -13,7 +13,7 @@ import javax.persistence.MapsId;
 /*Esta clase es no misional, esta es para dar seguridad.*/
 @Entity(name="GRUPO_PERSONA")
 public class GrupoPersona implements Serializable {
-    /*Acá le estamos diciendo que va a embeber ese ID. ¿Cómo sabe cúal Embedded,
+    /*Acá le estamos diciendo que va a embeber ese ID. ¿Cómo sabe cúal Embedded?,
       pues con el tipo de clase del ID.*/
     @EmbeddedId
     private GrupoPersonaPK id;
