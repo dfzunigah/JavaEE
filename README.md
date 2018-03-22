@@ -75,13 +75,9 @@ En el caso de los esquemas .SINGLETABLE y .JOINED se crea automaticamente un atr
 * Error: `'Could not start GlassFish Server 4.1: HTTP or HTTPS listener port is occupied while server is not running'`
   * Basta con cambiar el puerto por defecto de Glassfish.
   * En NetBeans, en la pestaña "Services" buscar "Servers" y luego Glassfish, darle click derecho y en "Properties". Buscar un campo llamado "Domain", a su lado está la dirección asociada.
-  * Dirigirse a la carpeta de la dirección y buscar el archivo `domain.xml`, buscar la línea.
-  
+  * Dirigirse a la carpeta de la dirección y buscar el archivo `domain.xml`, buscar la línea indicada abajo. La cual por lo general está a la mitad del archivo, y cambiar el puerto, por defecto el 8080, a 9090.
+  * [Solución del problema en StackOverFlow.](https://stackoverflow.com/questions/26004517/cannot-start-glassfish-4-1-from-within-netbeans-8-0-1-service-area)
+
 ```
 <network-listener port="8080" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>
 ```
-  
-  * La cual por lo general está a la mitad del archivo, y cambiar el puerto, por defecto el 8080, a 9090.
-  * [Solución del problema en StackOverFlow.](https://stackoverflow.com/questions/26004517/cannot-start-glassfish-4-1-from-within-netbeans-8-0-1-service-area)
-  
-  
