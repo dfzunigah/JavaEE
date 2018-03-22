@@ -71,3 +71,5 @@ Otras opciones son .SEQUENCE, .TABLE y .AUTO. En este caso se está usando una D
 El .TABLE es portable entre cualquier DB pero puede ofrecer problemas de desempeño pues le toca ir a buscar los elementos cada vez.
 
 El .AUTO selecciona alguno de los otros tres atributos en base al proveedor de persistencia, es necesario mirar la documentación de cada uno.
+
+# NEa
