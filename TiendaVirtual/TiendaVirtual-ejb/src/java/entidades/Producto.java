@@ -45,14 +45,11 @@ public class Producto implements Serializable {
     private Vendedor vendedor;
     
     /*Cuando es @ManyToMany uno elige quién es el dueño de la relación, en caso
-      de no colcoar quién es el dueño, como acá, entonces el dueño de la relación
+      de no colocar quién es el dueño, como acá, entonces el dueño de la relación
       es el del otro lado.*/
     @ManyToMany
     private List<Categoria> categorias;
-    
-    /*Este es un campo opcional y sólo va a ser llenado cuando se vincule a una orden.
-      Por default es opcional aunque tambien se podría colocar de manera explicita como
-      (optional = true)*/
+   
     @ManyToOne
     @JoinColumn(name="ID_ORDEN")
     private Orden orden;
