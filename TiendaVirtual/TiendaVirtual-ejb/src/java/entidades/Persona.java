@@ -18,8 +18,6 @@ import javax.persistence.TemporalType;
  * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 @Entity
-/*Otras alternativas son SINGLE_TABLE que es el primer esquema, TABLE_PER_CLASS que
-  es el segundo esquema y finalmente JOINED que es el tercer esquema.*/
 @Inheritance(strategy = InheritanceType.JOINED)
 /*Por defecto para el esquema 1 o 3 se crea un campo por default llamado DTYPE que
   indica qué tipo de hijo es. Nosotros podemos cambiar ese default a través de
@@ -27,20 +25,11 @@ import javax.persistence.TemporalType;
   a tener una longitud de 1 (c-v).*/
 @DiscriminatorColumn(name="TIPO_PERSONA", discriminatorType=DiscriminatorType.STRING, length=1)
 public class Persona implements Serializable {
-    //Si no le colocamos el "optional" entonces queda por defecto
-    @Id //Lave primaria
+    @Id
     @Column(length = 12)
     private String login;
     
-    /*Esto describe la relación entre Persona y TipoIdentificación. El
-      optional=false es para que sea obligatorio que sea de este tipo la relación.
-      Pero acá no se hacen validaciones, sencillamente se muestra cómo se relaciona
-      con la BD, es decir, si alguien le envía un nulo eso llega hasta la BD y allá
-      se totea. Para validar existe un FrameWork llamado Bean Validation que usa
-      algunas anotaciones que realizan lo que necestio en validación.*/
     @ManyToOne(optional=false) 
-    /*Siempre que sea un campo normal, por ejemplo "nombre" se utiliza @Column, en
-      cambio si es una relación se utiliza @JoinColumn.*/
     @JoinColumn(name="TIPO_ID")
     private TipoIdentificacion tipoId;
     
@@ -60,8 +49,6 @@ public class Persona implements Serializable {
     private String apellido2;
     
     @Column(name="FECHA_NACIMIENTO")
-    /*Con .DATE sólo da la fecha. Si yo quiero sólo hora coloco .TIME,
-      si yo quiero fecha y hora coloco .TIMESTAMP*/
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
     
