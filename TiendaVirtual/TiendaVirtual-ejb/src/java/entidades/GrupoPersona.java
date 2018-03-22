@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 /**
- * @author Daniel Zuñiga (13/04/18) @ UEC
+ * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 /*Esta clase es no misional, esta es para dar seguridad.*/
 @Entity(name="GRUPO_PERSONA")
