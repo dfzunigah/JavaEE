@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * @author Daniel Zuñiga (13/04/18) @ UEC
+ * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 /*En esta clase se abstraen las llaves primarias (Primary Key - PK). Esto no es
   una entidad. Es una llave primaria que va a ir embebida en otro lado.*/
