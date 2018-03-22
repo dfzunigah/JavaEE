@@ -21,7 +21,9 @@ public class Categoria implements Serializable {
     @Column(length=100)
     private String descripcion;
     
-    /*Acá es necesario colocar el mappedBy porque al otro lado no lo colocamos.*/
+    /*En una relación ManyToMany siempre hay un dueño, uno elige quién es.
+      Pero siempre debe haber un dueño, en este caso como en "Categorias"
+      no se colocó la notación entonces acá se coloca.*/
     @ManyToMany(mappedBy = "categorias")
     private List<Producto> productos;
 
