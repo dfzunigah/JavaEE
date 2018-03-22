@@ -1,0 +1,4 @@
+select * from producto;
+select * from categoria;
+select * from orden;
+select * from informacion_factura;
