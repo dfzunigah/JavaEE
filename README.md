@@ -35,6 +35,17 @@ Este proyecto se desarrollo usando NetBeans 8.2 & Java EE.
   * Con .DATE sólo da la fecha (dd/mm/yyyy).
   * Con .TIME sólo da la hora.
   * Con .TIMESTAMP da la fecha y la hora.
+* La estrategia para que un campo sea incremental secuencial es:
+
+```sh
+ @GeneratedValue(strategy=GenerationType.IDENTITY)
+```
+Otras opciones son .SEQUENCE, .TABLE y .AUTO. En este caso se está usando una DB de Java-Derby; sin embargo en otras DBs, para hacer que el campo sea incremental se requiere SEQUENCE, no .IDENTITY. Entonces funcionaría bien en SQLServer pero no en Oracle.
+
+El .TABLE es portable entre cualquier DB pero puede ofrecer problemas de desempeño pues le toca ir a buscar los elementos cada vez.
+
+El .AUTO selecciona alguno de los otros tres atributos en base al proveedor de persistencia, es necesario mirar la documentación de cada uno.
+
 * La notación `@Remove` indica a los EJB en estado statefull en qué método debe destruir el Bean. Se colocan en la interfaz. Para ver un ejemplo mirar [AdministracionOrdenLocal.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/logica/AdministracionOrdenLocal.java).
 * Utilizando un EntityManager como moderador entre el modelo de dominio y el modelo relacional, es posible crear Queries a través de notaciones.
   * El tipo de Query implementado en este caso es @NamedQuery. Estos se componen básicamente de dos (2) partes: Un nombre y la Query que es escrita en JPQL (lo que lo hace portable de los motores de bases de datos).
@@ -56,20 +67,15 @@ En el caso de los esquemas .SINGLETABLE y .JOINED se crea automaticamente un atr
   * Si esa relación es muchos a 1 `@ManyToOne`, el dueño de la relación es el lado muchos (Many).
   * Cuando la relación es muchos a muchos `@ManyToMany`, uno elige quién es el dueño de la relación. En cualquier caso una de las entidades debe llevar la etiqueta de dueño.
   * Por defecto todas las relaciones son opcionales, es decir, no se necesita colocar nada además del tipo de relación, por ejemplo `@ManyToOne` es una relación opcional. Si se quiere hacer que se vuelvan obligatorias entonces se utiliza la siguiente anotación `@Relationship(optional=false)`
-  
-## Otras cosas
-
 * Lo ideal es que todas las entidades sean serializables, es decir que implementen la interfaz Serializable, de modo que se puedan guardar en disco secundario y de esta manera se pueda desplegar la aplicación en otras máquinas.
   * En caso de no hacer serializables las entidades igual el proyecto funciona pero a nivel local.
-* La estrategia para que un campo sea incremental secuencial es:
 
-```sh
- @GeneratedValue(strategy=GenerationType.IDENTITY)
-```
-Otras opciones son .SEQUENCE, .TABLE y .AUTO. En este caso se está usando una DB de Java-Derby; sin embargo en otras DBs, para hacer que el campo sea incremental se requiere SEQUENCE, no .IDENTITY. Entonces funcionaría bien en SQLServer pero no en Oracle.
+## Solución a algunos problemas comunes
 
-El .TABLE es portable entre cualquier DB pero puede ofrecer problemas de desempeño pues le toca ir a buscar los elementos cada vez.
-
-El .AUTO selecciona alguno de los otros tres atributos en base al proveedor de persistencia, es necesario mirar la documentación de cada uno.
-
-# NEa
+* Error: `'Could not start GlassFish Server 4.1: HTTP or HTTPS listener port is occupied while server is not running'`
+  * Basta con cambiar el puerto por defecto de Glassfish.
+  * En NetBeans, en la pestaña "Services" buscar "Servers" y luego Glassfish, darle click derecho y en "Properties". Buscar un campo llamado "Domain", a su lado está la dirección asociada.
+  * Dirigirse a la carpeta de la dirección y buscar el archivo `domain.xml`, buscar la línea `<network-listener port="8080" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>`, por lo general está a la mitad del archivo, y cambiar el puerto, por defecto el 8080, a 9090.
+  * [Solución del problema en StackOverFlow.](https://stackoverflow.com/questions/26004517/cannot-start-glassfish-4-1-from-within-netbeans-8-0-1-service-area)
+  
+  
