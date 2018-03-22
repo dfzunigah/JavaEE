@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author Daniel Zuñiga (13/04/18) @ UEC
+ * @author Daniel Zuñiga (13/03/18) @ UEC
  **/
 @Entity
 @Table(name="INFORMACION_ENVIO")
