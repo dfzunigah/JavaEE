@@ -26,7 +26,9 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     private InformaciónFactura informacionFactura;
     private InformaciónEnvio informacionEnvio;
     
-    /*Acá se hace el cambio de PersistenciaLocal a PersistenciaJPALocal*/
+    /*En caso de que se quiera que el EntityManager sea el mediador usar AdministracionPersistenciaJPALocal.
+      En caso de que se quiera hacer el manejo a través de SQL directo usar AdministracionPersistenciaLocal.
+      Importar sus respectivos módulos.*/
     @EJB
     AdministracionPersistenciaJPALocal administracionPersistencia;
     
@@ -65,11 +67,11 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     public Integer crearOrdenCompra() {
         /*Acá lo que hace con estos dos métodos en guardar a través de AdminPersistencia
           los datos en la DB.*/
-        /*Estas dos líneas se eliminan en la nueva versión*/
+        /*Utilizar estás dos líneas en caso de que use interacción directa con SQL.*/
         //informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
         //informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));
         
-        /*Estas dos líneas se agregaron en la nueva versión.*/
+        /*En caso de usar el EntityManager para hacer de mediador, usar estas líneas.*/
         administracionPersistencia.crearInformacionEnvio(informacionEnvio);
         administracionPersistencia.crearInformacionFactura(informacionFactura);
         
@@ -79,7 +81,8 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         orden.setInformaciónEnvio(informacionEnvio);
         orden.setInformaciónFactura(informacionFactura);
         administracionPersistencia.crearOrden(orden);
-        /*Esta línea se elimina en la nueva versión.*/
+        /*Si se quere usar el EntityManager como mediador, comentar esta línea.
+          Si se quiere usar SQL directo implementar esta línea.*/
         //orden.setId(administracionPersistencia.crearOrden(orden));
         
         /*Cuando la orden ya existe lo único que hago es vincular a los productos
