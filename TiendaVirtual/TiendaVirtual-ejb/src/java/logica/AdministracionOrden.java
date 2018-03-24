@@ -12,7 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 /**
- * @author Daniel Zuñiga (21/03/18) @ UEC
+ * @author Daniel Zuñiga (22/03/18) @ UEC
  **/
 /*Este es como un carrito de modo que sí requiere recordar su estado.*/
 @Stateful
