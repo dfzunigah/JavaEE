@@ -26,8 +26,8 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Producto p"),
 @NamedQuery(name = "findProductById", query = "SELECT p FROM Producto p WHERE p.id = :idProducto")
 })
-/*Siempre que se va a ejecutar una operacion sobre esta clase entonces el busca
-  estas clases para verificar los métodos del ciclo de vida. Se puede colocar más de
+/*Siempre que se va a ejecutar una operacion sobre esta clase entonces él busca
+  la clase argumento para verificar los métodos del ciclo de vida. Se puede colocar más de
   una clase separadas con comas y las clases se ejecutan en el orden en que se colocan.*/
 @EntityListeners(MonitoreoProducto.class)
 public class Producto implements Serializable {
