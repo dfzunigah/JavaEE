@@ -52,6 +52,7 @@ El .AUTO selecciona alguno de los otros tres atributos en base al proveedor de p
   * El nombre debe ser **único** entre todas las queries de todo el programa.
   * Para ver un ejemplo de su definición, ver [Producto.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/entidades/Producto.java) o [Comprador.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/entidades/Comprador.java).
   * Para ver la implementación de las queries, ver los métodos consultarCompradores() o consultarProductos() en [AdministracionPersistenciaJPA.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/logica/AdministracionPersistenciaJPA.java).
+* Para saber más acerca de interceptores, visitar la clase [CreacionOrdenInterceptor.java](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/auditoria/CreacionOrdenInterceptor.java).
 
 ## Relaciones
 * El modelo relacional no maneja herencia, cosa que sí maneja el modelo de dominio. Por eso existen tres alternativas:
