@@ -1,5 +1,7 @@
 # JavaEE
-Ejemplos de Java Web EE desarrollados durante el curso Java Web EE.
+Ejemplo de Java Web EE desarrollado durante el curso Java Web EE.
+
+La carpeta `Versioning` contiene cada versión del proyecto de manera individual.
 
 Este proyecto se desarrollo usando NetBeans 8.2 & Java EE.
 
