@@ -84,3 +84,6 @@ En el caso de los esquemas .SINGLETABLE y .JOINED se crea automaticamente un atr
 ```
 <network-listener port="8080" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>
 ```
+
+* Para el caso de los proyectos en la carpeta `Versioning`, descargar el archivo comprimido y descomprimirlo.
+  * En caso de querer enviar el archivo por correo, por lo general en el caso de GMAIL por temas de seguridad siempre se bloquean estos archivos. Simplemente cambia la extensión ".zip" por cualquier otra cosa, como ".aaa".
