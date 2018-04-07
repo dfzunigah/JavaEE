@@ -87,3 +87,5 @@ En el caso de los esquemas .SINGLETABLE y .JOINED se crea automaticamente un atr
 
 * Para el caso de los proyectos en la carpeta `Versioning`, descargar el archivo comprimido y descomprimirlo.
   * En caso de querer enviar el archivo por correo, por lo general en el caso de GMAIL por temas de seguridad siempre se bloquean estos archivos. Simplemente cambia la extensión ".zip" por cualquier otra cosa, como ".aaa".
+
+* Es posible que se genere un error en el archivo [AdministracionPersistenciaJPA](https://github.com/dfzunigah/JavaEE/blob/master/TiendaVirtual/TiendaVirtual-ejb/src/java/logica/AdministracionPersistenciaJPA.java) debido a los timers, esto es debido a incompatibilidades con el servidor. Para solucionarlos simplemente comenten las líneas relacionadas con los timer, es decir, los métodos `timerCrearOrden` y `timerHora` y una línea en el método `crearOrden`.
