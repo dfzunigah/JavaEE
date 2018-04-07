@@ -23,15 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Orden implements Serializable {
-    /*El orden en el que yo defino mis @ no altera el resultado.*/
     @Id
-    /*Esta es ña estrategia para que sea incremental secuencial. Otras opciones
-      son SEQUENCE, TABLE y AUTO. Sin embargo en otras bases de datos, para hacer
-      que el campo sea incremental se requiere SEQUENCE, no este valor. Acá funcionaría
-      bien en SQLSever pero no en Oracle. El .TABLE es portable entre cualquier
-      base de datos pero puede ofrecer problemas de desempeño pues le toca ir a buscar.
-      El .AUTO selecciona alguno de los otros tres atributos en base al proveedor
-      de persistencia, es necesario mirar la documentación.*/
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     
