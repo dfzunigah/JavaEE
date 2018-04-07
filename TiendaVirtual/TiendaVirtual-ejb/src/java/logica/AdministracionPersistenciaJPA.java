@@ -34,6 +34,7 @@ import notificaciones.NotificacionInterceptor;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionPersistenciaJPA implements AdministracionPersistenciaJPALocal {
     /*Esto reemplaza el manejo de conexión de la DB, lo de pre y post.*/
+    /*En caso de tener más de un Data Source linkeado vinculado al proyecto, es necesario especificar a qué DS te estás conectando.*/
     @PersistenceContext(unitName = "TiendaVirtual-ejbPU")
     private EntityManager em;
     /*Este es modelo programatico. Pero acá no se sigue la POA.*/
