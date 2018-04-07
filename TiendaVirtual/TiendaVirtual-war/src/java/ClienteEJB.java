@@ -27,7 +27,9 @@ import logica.AdministracionPersistenciaJPALocal;
 public class ClienteEJB extends HttpServlet {
     
     /*Acá se le inyectan las dependencias, no hay necesidad de crearlos con "new".*/
-    /*Acá se hace el cambio de PersistenciaLocal a PersistenciaJPALocal*/
+    /*Si se quiere usar el EntityManager como mediador se usa AdministracionPersistenciaJPALocal.
+      En caso de que se quiere hacer los pedidos mediante SQL se usa AdministracionPersistenciaLocal.
+      Importar los módulos respectivos.*/
     @EJB
     AdministracionPersistenciaJPALocal administracionPersistencia;
     
@@ -56,9 +58,9 @@ public class ClienteEJB extends HttpServlet {
             producto = administracionPersistencia.consultarProducto(2);
             administracionOrden.adicionarProducto(producto);
             
-            /*Esta línea se agrega en la nueva versión del programa.*/
+            /*Si el EntityManager está de mediador, usar esta línea.*/
             Comprador comprador = administracionPersistencia.consultarComprador("maria");
-            /*Estas dos línea se reemplazan en la nueva versión.*/
+            /*Si las peticiones se hacen directamente mediante SQL, usar estas dos líneas.*/
             //Comprador comprador = new Comprador();
             //comprador.setLogin("maria");
             administracionOrden.adicionarComprador(comprador);
