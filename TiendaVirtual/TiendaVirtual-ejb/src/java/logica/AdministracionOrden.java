@@ -6,19 +6,34 @@ import entidades.InformaciónEnvio;
 import entidades.InformaciónFactura;
 import entidades.Orden;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 
 /**
- * @author Daniel Zuñiga (22/03/18) @ UEC
+ * @author Daniel Zuñiga (04/04/18) @ UEC
  **/
 /*Este es como un carrito de modo que sí requiere recordar su estado.*/
+/*El Container está por defecto pero es una buena práctica colocarlo.*/
+/*Este atributo de transaccionalidad se coloca a nivel de clase y aplica para
+  cada método que no tenga un atributo definido. Como el resto de métodos no
+  tienen operaciones en DB sino que son en memoria entonces no necesitan un
+  contexto operacional, por eso se les coloca el NOT_SUPPORTED. Es peligroso
+  colocar el NEVER porque es posible que antes de esto sí exista un contexto y
+  entonces boom, pailas.*/
 @Stateful
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionOrden implements AdministracionOrdenLocal {
     /*Estos son los atributos que se guardan en memoria.*/
     private List<Producto> productos;
@@ -26,9 +41,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     private InformaciónFactura informacionFactura;
     private InformaciónEnvio informacionEnvio;
     
-    /*En caso de que se quiera que el EntityManager sea el mediador usar AdministracionPersistenciaJPALocal.
-      En caso de que se quiera hacer el manejo a través de SQL directo usar AdministracionPersistenciaLocal.
-      Importar sus respectivos módulos.*/
+    /*Acá se hace el cambio de PersistenciaLocal a PersistenciaJPALocal*/
     @EJB
     AdministracionPersistenciaJPALocal administracionPersistencia;
     
@@ -61,17 +74,20 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
       con comas separadas.
       Se puede colocar a nivel de clase y lo que haría es que intercepta todos
       los métodos de esa clase.*/
+    /*No me interesa que hay para atrás, creo un nuevo contexto de transacción.
+      Por eso se coloca el REQUIRES_NEW.*/
     @Remove
     @Interceptors(CreacionOrdenInterceptor.class)
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
-    public Integer crearOrdenCompra() {
+    public Integer crearOrdenCompra() throws CreacionOrdenException, ModificacionProductoException{
         /*Acá lo que hace con estos dos métodos en guardar a través de AdminPersistencia
           los datos en la DB.*/
-        /*Utilizar estás dos líneas en caso de que use interacción directa con SQL.*/
+        /*Estas dos líneas se eliminan en la nueva versión*/
         //informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
         //informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));
         
-        /*En caso de usar el EntityManager para hacer de mediador, usar estas líneas.*/
+        /*Estas dos líneas se agregaron en la nueva versión.*/
         administracionPersistencia.crearInformacionEnvio(informacionEnvio);
         administracionPersistencia.crearInformacionFactura(informacionFactura);
         
@@ -80,9 +96,9 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         orden.setFecha(new Date());
         orden.setInformaciónEnvio(informacionEnvio);
         orden.setInformaciónFactura(informacionFactura);
+        orden.setProductos(productos);
         administracionPersistencia.crearOrden(orden);
-        /*Si se quere usar el EntityManager como mediador, comentar esta línea.
-          Si se quiere usar SQL directo implementar esta línea.*/
+        /*Esta línea se elimina en la nueva versión.*/
         //orden.setId(administracionPersistencia.crearOrden(orden));
         
         /*Cuando la orden ya existe lo único que hago es vincular a los productos
